@@ -1,6 +1,7 @@
 package ru.pigarev.market.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.pigarev.market.dto.ProductDto;
 import ru.pigarev.market.model.Product;
@@ -16,28 +17,30 @@ public class ProductsController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    public List<ProductDto> findAll() {
-
-        return productService.findAll().stream().map(ProductDto::new).collect(Collectors.toList());
+    public Page<ProductDto> findAll(@RequestParam(name = "page", defaultValue = "1") int pageIndex) {
+        if (pageIndex < 1) {
+            pageIndex = 1;
+        }
+        return productService.findAll(pageIndex - 1, 10).map(ProductDto::new);
     }
 
     @GetMapping("/products/after/{minPrice}")
-    public List<Product> findByCostAfter(@PathVariable Double minPrice) {
+    public List<ProductDto> findByCostAfter(@PathVariable Double minPrice) {
 
-        return productService.findByCostAfter(minPrice);
+        return productService.findByCostAfter(minPrice).stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
     @GetMapping("/products/before/{maxPrice}")
-    public List<Product> findByCostBefore(@PathVariable Double maxPrice) {
+    public List<ProductDto> findByCostBefore(@PathVariable Double maxPrice) {
 
-        return productService.findByCostBefore(maxPrice);
+        return productService.findByCostBefore(maxPrice).stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
     @GetMapping("/products/between")
-    public List<Product> findByCostBetween(@RequestParam(name = "min") Double minPrice,
-                                           @RequestParam(name = "max") Double maxPrice) {
+    public List<ProductDto> findByCostBetween(@RequestParam(name = "min") Double minPrice,
+                                              @RequestParam(name = "max") Double maxPrice) {
 
-        return productService.findByCostBetween(minPrice, maxPrice);
+        return productService.findByCostBetween(minPrice, maxPrice).stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
     @GetMapping("/products/{id}")
