@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная странца</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="market-front">
+<div class="container" ng-controller="appController">
+    <br>
+    <h3>Главная страница</h3>
+    <br>
+    <H1>Список Продуктов</H1>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Наименование</td>
+            <td>Стоимость</td>
+            <td></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="p in productsPage.content">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.cost}}</td>
+            <td>
+                <button type="button" class="btn btn-secondary" ng-click="showInfo(p)">Подробнее</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-secondary" ng-click="removeProduct(p)">Удалить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-secondary" ng-click="loadProducts()">Refresh</button>
+    <br>
+    <button type="button" class="btn btn-secondary" ng-click="loadPreviousPage()">Previous</button>
+    <button type="button" class="btn btn-secondary" ng-click="loadNextPage()">Next</button>
+
+</div>
+</body>
+</html>
