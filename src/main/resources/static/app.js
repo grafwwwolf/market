@@ -81,6 +81,17 @@ angular.module('market-front', []).controller('appController', function ($scope,
                 });
     }
 
+    $scope.updateProduct = function () {
+        $http.put(contextPath + '/products', $scope.new_product)
+            .then(function successCallback(response) {
+                    $scope.loadProducts(currentPage);
+                    $scope.new_product = null;
+                },
+                function failCallback(response) {
+                    alert(response.data.message);
+                });
+    }
+
     $scope.generatePagesIndexes = function (startPage, endPage) {
         let arr = [];
         for (let i = startPage; i < endPage + 1; i++) {

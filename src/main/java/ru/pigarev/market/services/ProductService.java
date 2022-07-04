@@ -32,6 +32,13 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+//    public Product update(Product product) {
+//
+//        Product uprateProduct = findById(product.getId()).orElse()
+//
+//        return productRepository.save(product);
+//    }
+
     public void removeProduct(Long id) {
         Product product = productRepository.findById(id).get();
         if (Objects.nonNull(product)) {

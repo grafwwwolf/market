@@ -27,25 +27,6 @@ public class ProductsController {
         return productService.findAll(pageIndex - 1, 10).map(ProductDto::new);
     }
 
-//    @GetMapping("/products/after/{minPrice}")
-//    public List<ProductDto> findByCostAfter(@PathVariable Double minPrice) {
-//
-//        return productService.findByCostAfter(minPrice).stream().map(ProductDto::new).collect(Collectors.toList());
-//    }
-//
-//    @GetMapping("/products/before/{maxPrice}")
-//    public List<ProductDto> findByCostBefore(@PathVariable Double maxPrice) {
-//
-//        return productService.findByCostBefore(maxPrice).stream().map(ProductDto::new).collect(Collectors.toList());
-//    }
-//
-//    @GetMapping("/products/between")
-//    public List<ProductDto> findByCostBetween(@RequestParam(name = "min") Double minPrice,
-//                                              @RequestParam(name = "max") Double maxPrice) {
-//
-//        return productService.findByCostBetween(minPrice, maxPrice).stream().map(ProductDto::new).collect(Collectors.toList());
-//    }
-
     @GetMapping("/products/{id}")
     public ProductDto findById(@PathVariable Long id) {
 
@@ -60,6 +41,22 @@ public class ProductsController {
 
         Product product = new Product();
         product.setId(productDto.getId());
+        product.setTitle(productDto.getTitle());
+        product.setCost(productDto.getCost());
+        productService.save(product);
+
+        return new ProductDto(product);
+    }
+
+    @PutMapping("/products")
+    public ProductDto update(@RequestBody ProductDto productDto) {
+
+//        Product product = new Product();
+//        product.setId(productDto.getId());
+//        product.setTitle(productDto.getTitle());
+//        product.setCost(productDto.getCost());
+
+        Product product = productService.findById(productDto.getId()).orElseThrow(() -> new ResourceNotFoundException("Product id = " + productDto.getId() + " not found"));
         product.setTitle(productDto.getTitle());
         product.setCost(productDto.getCost());
         productService.save(product);
