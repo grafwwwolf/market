@@ -82,10 +82,10 @@ angular.module('market-front', []).controller('appController', function ($scope,
     }
 
     $scope.updateProduct = function () {
-        $http.put(contextPath + '/products', $scope.new_product)
+        $http.put(contextPath + '/products', $scope.upd_product)
             .then(function successCallback(response) {
                     $scope.loadProducts(currentPage);
-                    $scope.new_product = null;
+                    $scope.upd_product = null;
                 },
                 function failCallback(response) {
                     alert(response.data.message);

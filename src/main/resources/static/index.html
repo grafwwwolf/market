@@ -93,15 +93,15 @@
     <form novalidate ng-submit="updateProduct()">
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">ID</label>
-            <input type="number" class="form-control" placeholder="ID" ng-model="new_product.id">
+            <input type="number" class="form-control" placeholder="ID" ng-model="upd_product.id">
         </div>
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Наименование</label>
-            <input type="text" class="form-control" placeholder="Наименование" ng-model="new_product.title">
+            <input type="text" class="form-control" placeholder="Наименование" ng-model="upd_product.title">
         </div>
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Стоимость</label>
-            <input type="number" class="form-control" placeholder="Стоимость" ng-model="new_product.cost">
+            <input type="number" class="form-control" placeholder="Стоимость" ng-model="upd_product.cost">
         </div>
 
         <button type="submit" class="btn btn-secondary">Обновить продукт</button>
