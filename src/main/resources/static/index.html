@@ -46,13 +46,14 @@
     <button type="button" class="btn btn-secondary" ng-click="loadProducts()">Обновить</button>
     <br>
     <p></p>
-    <button type="button" class="btn btn-secondary" ng-click="loadPreviousPage()">Предыдущая</button>
-    <button type="button" class="btn btn-secondary" ng-click="loadNextPage()">Следующая</button>
+<!--    <button type="button" class="btn btn-secondary" ng-click="loadPreviousPage()">Предыдущая</button>-->
+<!--    <button type="button" class="btn btn-secondary" ng-click="loadNextPage()">Следующая</button>-->
 
     <nav aria-label="Page navigation example">
         <ul class="pagination">
+
             <li class="page-item">
-                <a class="page-link" aria-label="Previous">
+                <a class="page-link" aria-label="Previous" ng-click="loadPreviousPage()">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
 
@@ -62,11 +63,11 @@
             </li>
 
             <li class="page-item">
-                <a class="page-link" aria-label="Next">
+                <a class="page-link" aria-label="Next" ng-click="loadNextPage()">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
-
             </li>
+
         </ul>
     </nav>
 

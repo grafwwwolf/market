@@ -5,7 +5,7 @@ angular.module('market-front', []).controller('appController', function ($scope,
     let totalPgs;
 
     $scope.loadProducts = function (pageIndex = currentPage) {
-
+        currentPage = pageIndex;
         $http({
             url: contextPath + '/products',
             method: 'GET',
@@ -17,15 +17,27 @@ angular.module('market-front', []).controller('appController', function ($scope,
             $scope.productsPage = response.data;
             $scope.paginationArray = $scope.generatePagesIndexes(1, $scope.productsPage.totalPages);
             totalPgs = response.data.totalPages;
+
         });
     }
 
+    // $scope.removeProduct = function (product) {
+    //     $http.get(contextPath + '/products/delete/' + product.id)
+    //         .then(function (response) {
+    //             console.log(response);
+    //             $scope.loadProducts();
+    //         });
+    // }
+
     $scope.removeProduct = function (product) {
-        $http.get(contextPath + '/products/delete/' + product.id)
-            .then(function (response) {
-                console.log(response);
-                $scope.loadProducts();
-            });
+        $http.delete(contextPath + '/products/' + product.id)
+            .then(function successCallback(response) {
+                    console.log(response);
+                    $scope.loadProducts(currentPage);
+                },
+                function failCallback(response) {
+                    alert(response.data.message);
+                });
     }
 
     $scope.showInfo = function (product) {
@@ -36,8 +48,12 @@ angular.module('market-front', []).controller('appController', function ($scope,
         if (currentPage < 2) {
             alert("Вы находитесь на первой странице")
         } else {
-            currentPage--;
-            $scope.loadProducts();
+            if (currentPage == 1) {
+                $scope.loadProducts();
+            } else {
+                currentPage--;
+                $scope.loadProducts();
+            }
         }
     }
 
@@ -45,8 +61,12 @@ angular.module('market-front', []).controller('appController', function ($scope,
         if (currentPage > totalPgs - 1) {
             alert("Вы находитесь на последней странице")
         } else {
-            currentPage++;
-            $scope.loadProducts();
+            if (currentPage == totalPgs) {
+                $scope.loadProducts();
+            } else {
+                currentPage++;
+                $scope.loadProducts();
+            }
         }
     }
 
