@@ -21,14 +21,6 @@ angular.module('market-front', []).controller('appController', function ($scope,
         });
     }
 
-    // $scope.removeProduct = function (product) {
-    //     $http.get(contextPath + '/products/delete/' + product.id)
-    //         .then(function (response) {
-    //             console.log(response);
-    //             $scope.loadProducts();
-    //         });
-    // }
-
     $scope.removeProduct = function (product) {
         $http.delete(contextPath + '/products/' + product.id)
             .then(function successCallback(response) {
@@ -75,6 +67,16 @@ angular.module('market-front', []).controller('appController', function ($scope,
             .then(function successCallback(response) {
                     $scope.loadProducts(currentPage);
                     $scope.new_product = null;
+                },
+                function failCallback(response) {
+                    alert(response.data.message);
+                });
+    }
+
+    $scope.prepareProductForUpdate = function (productId) {
+        $http.get(contextPath + '/products/' + productId)
+            .then(function successCallback(response) {
+                    $scope.upd_product = response.data;
                 },
                 function failCallback(response) {
                     alert(response.data.message);

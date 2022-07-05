@@ -4,6 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import ru.pigarev.market.dto.ProductDto;
+import ru.pigarev.market.exceptions.ResourceNotFoundException;
 import ru.pigarev.market.model.Product;
 import ru.pigarev.market.repositories.ProductRepository;
 
@@ -32,12 +36,15 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-//    public Product update(Product product) {
-//
-//        Product uprateProduct = findById(product.getId()).orElse()
-//
-//        return productRepository.save(product);
-//    }
+    @Transactional
+    public void updateProductFromDto(ProductDto productDto) {
+
+        Product product = findById(productDto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Product id = " + productDto.getId() + " not found"));
+        product.setTitle(productDto.getTitle());
+        product.setCost(productDto.getCost());
+        save(product);
+    }
 
     public void removeProduct(Long id) {
         Product product = productRepository.findById(id).get();

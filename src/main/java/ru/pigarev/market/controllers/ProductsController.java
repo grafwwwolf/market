@@ -49,19 +49,9 @@ public class ProductsController {
     }
 
     @PutMapping("/products")
-    public ProductDto update(@RequestBody ProductDto productDto) {
+    public void update(@RequestBody ProductDto productDto) {
 
-//        Product product = new Product();
-//        product.setId(productDto.getId());
-//        product.setTitle(productDto.getTitle());
-//        product.setCost(productDto.getCost());
-
-        Product product = productService.findById(productDto.getId()).orElseThrow(() -> new ResourceNotFoundException("Product id = " + productDto.getId() + " not found"));
-        product.setTitle(productDto.getTitle());
-        product.setCost(productDto.getCost());
-        productService.save(product);
-
-        return new ProductDto(product);
+        productService.updateProductFromDto(productDto);
     }
 
     @DeleteMapping("/products/{id}")

@@ -10,7 +10,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="app.js"></script>
+    <script src="index.js"></script>
 </head>
 <body ng-app="market-front">
 <div class="container" ng-controller="appController">
@@ -26,6 +26,7 @@
             <td>Стоимость</td>
             <td></td>
             <td></td>
+            <td></td>
         </tr>
         </thead>
         <tbody>
@@ -37,6 +38,10 @@
                 <button type="button" class="btn btn-secondary" ng-click="showInfo(p)">Подробнее</button>
             </td>
             <td>
+                <button type="button" class="btn btn-secondary" ng-click="prepareProductForUpdate(p.id)">Изменить
+                </button>
+            </td>
+            <td>
                 <button type="button" class="btn btn-secondary" ng-click="removeProduct(p)">Удалить</button>
             </td>
         </tr>
@@ -46,8 +51,8 @@
     <button type="button" class="btn btn-secondary" ng-click="loadProducts()">Обновить</button>
     <br>
     <p></p>
-<!--    <button type="button" class="btn btn-secondary" ng-click="loadPreviousPage()">Предыдущая</button>-->
-<!--    <button type="button" class="btn btn-secondary" ng-click="loadNextPage()">Следующая</button>-->
+    <!--    <button type="button" class="btn btn-secondary" ng-click="loadPreviousPage()">Предыдущая</button>-->
+    <!--    <button type="button" class="btn btn-secondary" ng-click="loadNextPage()">Следующая</button>-->
 
     <nav aria-label="Page navigation example">
         <ul class="pagination">
@@ -91,10 +96,6 @@
     <p></p>
     <h3>Обновить продукт</h3>
     <form novalidate ng-submit="updateProduct()">
-        <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">ID</label>
-            <input type="number" class="form-control" placeholder="ID" ng-model="upd_product.id">
-        </div>
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Наименование</label>
             <input type="text" class="form-control" placeholder="Наименование" ng-model="upd_product.title">
