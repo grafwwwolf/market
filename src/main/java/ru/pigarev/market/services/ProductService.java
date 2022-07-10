@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.pigarev.market.dto.ProductDto;
 import ru.pigarev.market.exceptions.ResourceNotFoundException;
+import ru.pigarev.market.model.Cart;
 import ru.pigarev.market.model.Product;
 import ru.pigarev.market.repositories.ProductRepository;
 
