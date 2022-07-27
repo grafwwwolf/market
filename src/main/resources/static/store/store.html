@@ -21,7 +21,7 @@
                 <button type="button" class="btn btn-secondary" ng-click="showInfo(p)">Подробнее</button>
             </td>
             <td>
-                <button type="button" class="btn btn-secondary" ng-click="navToEditProductPage(p.id)">Изменить</button>
+                <button type="button" class="btn btn-secondary" ng-click="navToEditProductPage(p.id)" ng-show="isUserLoggedIn()">Изменить</button>
             </td>
 <!--            <td>-->
 <!--                <button type="button" class="btn btn-secondary" ng-click="removeProduct(p)">Удалить</button>-->

@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1")
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/")
+    @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     public User save(@RequestBody @Validated User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

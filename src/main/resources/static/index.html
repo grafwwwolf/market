@@ -11,6 +11,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
 
 </head>
 <body ng-app="market-front">
@@ -28,7 +29,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#!/cart">Корзина</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" ng-show="isUserLoggedIn()">
                         <a class="nav-link" href="#!/create_product">Создать продукт(Техн.)</a>
                     </li>
                     <li class="nav-item" ng-show="!isUserLoggedIn()">
@@ -48,12 +49,10 @@
                         </form>
                     </li>
                     <li class="nav-item" ng-show="!isUserLoggedIn()" style="padding: 4px;">
-                        <a class="btn btn-outline-secondary btn-sm" href="#!/createUser">Регестрация</a>
+                        <a class="btn btn-outline-secondary btn-sm" href="#!/create_user">Регистрация</a>
                     </li>
                     <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
-                        <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти из учетной
-                            записи
-                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>
                     </li>
                 </ul>
             </div>
